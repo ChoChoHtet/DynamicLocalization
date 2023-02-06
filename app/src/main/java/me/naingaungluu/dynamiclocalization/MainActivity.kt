@@ -26,7 +26,7 @@ import me.naingaungluu.dynamiclocalization.ui.theme.DynamicLocalizationTheme
 class MainActivity : ComponentActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: HomeViewModel by viewModels()
-    private val aa:List<LocalizationData> = mutableListOf()
+    private val aa: List<LocalizationData> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /*setContent {
@@ -45,7 +45,16 @@ class MainActivity : ComponentActivity() {
         viewModel.localizationDataFlow
             .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
             .onEach {
+                //TODO way 1
                 binding.localization = it
+                // TODO Alternate way-2 , please don't forget to remove data variable in xml
+                /* binding.apply {
+                     tvGreeting.text = it[0].value
+                     tvLanguage.text = it[1].value
+                     btnChinese.text = it[2].value
+                     btnEnglish.text = it[3].value
+                     btnBurmese.text = it[4].value
+                 }*/
             }
             .launchIn(lifecycleScope)
 
@@ -54,9 +63,6 @@ class MainActivity : ComponentActivity() {
         }
         binding.btnEnglish.setOnClickListener {
             viewModel.switchToEnglish()
-        }
-        binding.btnChinese.setOnClickListener {
-            viewModel.switchToChinese()
         }
     }
 }
