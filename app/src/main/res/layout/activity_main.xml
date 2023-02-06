@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="localization"
+            type="java.util.List&lt;me.naingaungluu.dynamiclocalization.data.models.LocalizationData>" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvGreeting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{localization[0].value}" />
+
+        <TextView
+            android:id="@+id/tvLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{localization[1].value}" />
+
+        <TextView
+            android:id="@+id/btnChinese"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{localization[2].value}" />
+
+        <Button
+            android:id="@+id/btnEnglish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{localization[3].value}" />
+
+
+        <Button
+            android:id="@+id/btnBurmese"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{localization[4].value}" />
+    </LinearLayout>
+</layout>

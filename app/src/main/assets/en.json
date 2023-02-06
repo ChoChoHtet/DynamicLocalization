@@ -1,0 +1,44 @@
+[
+  {
+    "name": "title_name",
+    "value": "Codashop Global Series",
+    "plural_value": null,
+    "ab_value": null,
+    "args": 0
+  },
+  {
+    "name": "welcome_content",
+    "value": "Please select language",
+    "plural_value": null,
+    "ab_value": "Force a test crash...",
+    "args": 0
+  },
+  {
+    "name": "welcome_description",
+    "value": "arg1 follower/s",
+    "plural_value": null,
+    "ab_value": null,
+    "args": 1
+  },
+  {
+    "name": "btn_english",
+    "value": "English",
+    "plural_value": null,
+    "ab_value": "arg1 hasn't uploaded a screenshot!",
+    "args": 1
+  },
+  {
+    "name": "btn_burma",
+    "value": "Burma",
+    "plural_value": "arg1/arg2 Admins Selected",
+    "ab_value": null,
+    "args": 2
+  },
+  {
+    "name": "selected_users",
+    "value": "arg1/arg2 User Selected",
+    "plural_value": "arg1/arg2 Users Selected",
+    "ab_value": "Selected: arg1/arg2",
+    "args": 2
+  }
+]

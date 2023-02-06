@@ -1,0 +1,45 @@
+
+[
+  {
+    "name": "title_name",
+    "value": "မင်္ဂလာပါ။",
+    "plural_value": null,
+    "ab_value": null,
+    "args": 0
+  },
+  {
+    "name": "welcome_content",
+    "value": "ေးချယ်ထားသောဘာသာစကား",
+    "plural_value": null,
+    "ab_value": "Force a test crash...",
+    "args": 0
+  },
+  {
+    "name": "welcome_description",
+    "value": "အားလုံးကောင်းတယ်",
+    "plural_value": null,
+    "ab_value": null,
+    "args": 1
+  },
+  {
+    "name": "btn_english",
+    "value": "အင်္ဂလိပ်",
+    "plural_value": null,
+    "ab_value": "arg1 hasn't uploaded a screenshot!",
+    "args": 1
+  },
+  {
+    "name": "btn_burma",
+    "value": "မြန်မာ",
+    "plural_value": "arg1/arg2 Admins Selected",
+    "ab_value": null,
+    "args": 2
+  },
+  {
+    "name": "selected_users",
+    "value": "arg1/arg2 User Selected",
+    "plural_value": "arg1/arg2 Users Selected",
+    "ab_value": "Selected: arg1/arg2",
+    "args": 2
+  }
+]

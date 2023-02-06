@@ -28,25 +28,23 @@ object HiltInjectorModule {
         preferenceStorage: PreferenceStorage,
         localizationLocal: LocalizationLocal,
         localizationRemote: LocalizationRemote
-    ): LocalizationRepository
-    = LocalizationRepositoryImpl(preferenceStorage,localizationLocal,localizationRemote)
+    ): LocalizationRepository =
+        LocalizationRepositoryImpl(preferenceStorage, localizationLocal, localizationRemote)
 
     @ViewModelScoped
     @Provides
     fun providePreferenceStorage(
         @ApplicationContext context: Context
-    ): PreferenceStorage
-    = PreferenceStorageImpl(context)
+    ): PreferenceStorage = PreferenceStorageImpl(context)
 
     @ViewModelScoped
     @Provides
     fun provideLocalizationLocal(
         @ApplicationContext context: Context
-    ): LocalizationLocal
-    = LocalizationLocalImpl(context)
+    ): LocalizationLocal = LocalizationLocalImpl(context)
 
     @ViewModelScoped
     @Provides
-    fun provideLocalizationRemote(): LocalizationRemote
-    = LocalizationRemoteImpl()
+    fun provideLocalizationRemote(@ApplicationContext context: Context): LocalizationRemote =
+        LocalizationRemoteImpl(context)
 }

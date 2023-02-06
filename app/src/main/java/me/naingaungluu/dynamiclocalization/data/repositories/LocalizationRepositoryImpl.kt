@@ -6,13 +6,17 @@ import com.squareup.moshi.Moshi
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import me.naingaungluu.dynamiclocalization.R
 import me.naingaungluu.dynamiclocalization.data.models.Localization
 import me.naingaungluu.dynamiclocalization.data.models.LocalizationBundle
+import me.naingaungluu.dynamiclocalization.data.models.LocalizationData
 import me.naingaungluu.dynamiclocalization.data.sources.localization.LocalizationLocal
 import me.naingaungluu.dynamiclocalization.data.sources.localization.LocalizationRemote
 import me.naingaungluu.dynamiclocalization.preferences.AppLanguage
@@ -26,14 +30,10 @@ class LocalizationRepositoryImpl @Inject constructor(
     private val remote: LocalizationRemote,
 ) : LocalizationRepository {
 
-    private val _localizationFlow: MutableStateFlow<Localization> by lazy {
-        MutableStateFlow(
-            local.getLocalizationBundle().getLocalization(currentAppLanguage)
-        )
-    }
-
-    override val localizationFlow: StateFlow<Localization> = _localizationFlow
-    private var cachedLocalizationBundle : LocalizationBundle? = null
+    //TODO modify
+    private val _localizationDataFlow = Channel<List<LocalizationData>>()
+    override val localizationDataFlow: Flow<List<LocalizationData>> =
+        _localizationDataFlow.receiveAsFlow()
 
     override val currentAppLanguage: AppLanguage
         get() = preferenceStorage.getAppLanguage()
@@ -45,28 +45,29 @@ class LocalizationRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateLanguage(language: AppLanguage) {
-        _localizationFlow.value = getLocalization(language)
-        preferenceStorage.saveAppLanguage(language)
+        // _localizationFlow.value = getLocalization(language)
+        // preferenceStorage.saveAppLanguage(language)
+
+        val name = when (language) {
+            AppLanguage.BURMESE -> "mm.json"
+            else -> "en.json"
+        }
+        remote.getLocalizationList(name).let {
+            _localizationDataFlow.send(it)
+        }
     }
 
     private suspend fun getLocalizationFromRemote() {
         // Fetch localization data from remote here
-        remote.getLocalizationBundle().let {
-            cachedLocalizationBundle = it
-            _localizationFlow.value = it.getLocalization(currentAppLanguage)
+        /* remote.getLocalizationBundle().let {
+             cachedLocalizationBundle = it
+             _localizationFlow.value = it.getLocalization(currentAppLanguage)
+         }*/
+        remote.getLocalizationList("en.json").let {
+            // cachedLocalizationBundle = it
+            _localizationDataFlow.send(it)
         }
     }
 
-    private fun getLocalization(language: AppLanguage) : Localization
-    = cachedLocalizationBundle?.getLocalization(language)
-        ?: local.getLocalizationBundle().getLocalization(language)
-
-
-    fun LocalizationBundle.getLocalization(language: AppLanguage): Localization
-    = when(language) {
-        AppLanguage.ENGLISH -> en
-        AppLanguage.CHINESE -> cn
-        AppLanguage.BURMESE -> mm
-    }
 
 }

@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import me.naingaungluu.dynamiclocalization.data.models.Localization
+import me.naingaungluu.dynamiclocalization.data.models.LocalizationData
 import me.naingaungluu.dynamiclocalization.data.repositories.LocalizationRepository
 import javax.inject.Inject
 
@@ -22,10 +23,20 @@ abstract class LocalizedViewModel : ViewModel() {
     @Inject
     protected lateinit var localizationRepository: LocalizationRepository
 
-    val localizationFlow : StateFlow<Localization>
-        get() = localizationRepository.localizationFlow
+   /* val localizationFlow : StateFlow<Localization>
+        get() = localizationRepository.localizationFlow*/
+
 
     val localization : Localization
     get() = localizationFlow.value
+
+    val localizationFlow : StateFlow<Localization>
+        get() = localizationRepository.localizationFlow
+
+    val localizationData : Flow<List<LocalizationData>>
+        get() = localizationDataFlow
+
+    val localizationDataFlow : Flow<List<LocalizationData>>
+        get() = localizationRepository.localizationDataFlow
 
 }
