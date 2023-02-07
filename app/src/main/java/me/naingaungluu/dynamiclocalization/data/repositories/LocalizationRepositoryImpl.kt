@@ -29,6 +29,7 @@ class LocalizationRepositoryImpl @Inject constructor(
     private val local: LocalizationLocal,
     private val remote: LocalizationRemote,
 ) : LocalizationRepository {
+    override lateinit var localizationFlow: MutableStateFlow<Localization>
 
     //TODO modify
     private val _localizationDataFlow = Channel<List<LocalizationData>>()

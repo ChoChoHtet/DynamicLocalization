@@ -10,8 +10,10 @@ import java.util.*
 
 interface LocalizationRepository {
 
+    val localizationFlow: MutableStateFlow<Localization>
     val currentAppLanguage: AppLanguage
-    val localizationDataFlow: Flow<List<LocalizationData>>
-
     suspend fun updateLanguage(language: AppLanguage)
+
+    //View-Based
+    val localizationDataFlow: Flow<List<LocalizationData>>
 }

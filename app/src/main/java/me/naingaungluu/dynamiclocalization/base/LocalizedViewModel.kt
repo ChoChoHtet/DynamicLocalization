@@ -23,9 +23,6 @@ abstract class LocalizedViewModel : ViewModel() {
     @Inject
     protected lateinit var localizationRepository: LocalizationRepository
 
-   /* val localizationFlow : StateFlow<Localization>
-        get() = localizationRepository.localizationFlow*/
-
 
     val localization : Localization
     get() = localizationFlow.value
@@ -33,9 +30,8 @@ abstract class LocalizedViewModel : ViewModel() {
     val localizationFlow : StateFlow<Localization>
         get() = localizationRepository.localizationFlow
 
-    val localizationData : Flow<List<LocalizationData>>
-        get() = localizationDataFlow
 
+    //View-Based
     val localizationDataFlow : Flow<List<LocalizationData>>
         get() = localizationRepository.localizationDataFlow
 

@@ -24,9 +24,10 @@ import me.naingaungluu.dynamiclocalization.ui.theme.DynamicLocalizationTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     private lateinit var binding: ActivityMainBinding
     private val viewModel: HomeViewModel by viewModels()
-    private val aa: List<LocalizationData> = mutableListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /*setContent {
@@ -40,6 +41,8 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }*/
+
+        //View-Based
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel.localizationDataFlow
